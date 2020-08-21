@@ -1,0 +1,79 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/noe-ricoy/noe-ricoy.html">
+
+<dom-module id="workshop-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .icon {
+        cursor: pointer;
+        padding-top: 2px;
+      }
+
+      .ricoy {
+        margin-bottom: 20px;
+      }
+
+      .container {
+        margin-top: 55px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+    </style>
+
+    <div class="form">
+      <input required="" type="text" id="inputText" placeholder="Write a text">
+
+      <svg on-click="changeText" width="2em" height="2em" viewBox="0 0 16 16" class="icon" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M12 1H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2zM8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"></path>
+      </svg>
+
+      <p>Hacer click sobre el texto para animación</p>
+    </div>
+    
+    <div class="container" id="nooContent">
+      <noe-ricoy text="Noe Ricoy" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Click me" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 3" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 4" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 5" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 6" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 7" class="ricoy"></noe-ricoy>
+      <noe-ricoy text="Etiqueta 8" class="ricoy"></noe-ricoy>
+    </div>
+
+  </template>
+
+  <script>/**
+ * @customElement
+ * @polymer
+ */
+class WorkshopApp extends Polymer.Element {
+  static get is() {
+    return 'workshop-app';
+  }
+
+  static get properties() {
+    return {
+      prop1: {
+        type: String,
+        value: 'workshop-app'
+      }
+    };
+  }
+
+  changeText() {
+    let newText = this.$.inputText.value;
+    let nooContent = this.$.nooContent;
+    let noeRicoy = document.createElement('noe-ricoy');
+    if (newText) noeRicoy.setAttribute('text', newText);
+    nooContent.appendChild(noeRicoy);
+  }
+
+}
+
+window.customElements.define(WorkshopApp.is, WorkshopApp);</script>
+</dom-module>
