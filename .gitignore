@@ -1,1 +1,9 @@
 bower_components/
+
+.firebase
+.firebaserc
+firebase.json
+public
+
+
+..gitignore.swp
