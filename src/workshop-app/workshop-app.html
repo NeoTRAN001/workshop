@@ -33,6 +33,43 @@
       paper-card {
         margin: 1em;
       }
+
+      .myStyleOne {
+        --noe-ricoy-text-style: {
+          color: green;
+        }
+
+        --noe-ricoy-text-translate-Y: {
+          transform: translateY(-3em);
+        }
+
+        --noe-ricoy-text-translate-X: {
+          transform: translateX(1em);
+        }
+      }
+
+      .myStyleTwo {
+        --noe-ricoy-text-style: {
+          font-size: 120px;
+          background-color: rgb(43, 43, 43);
+          color: red;
+          border-radius: 10px;
+        }
+      }
+
+      .myStyleThree {
+        --noe-ricoy-text-style: {
+          color: blue;
+        }
+
+        --noe-ricoy-text-translate-Y: {
+          transform: skewX(30deg);
+        }
+
+        --noe-ricoy-text-translate-X: {
+          transform: translateX(0.1em);
+        }
+      }
     </style>
 
     <paper-card> <div class="card-content">
@@ -51,7 +88,7 @@
     
     <div class="container" id="nooContent">
       <paper-card><div class="card-content">
-          <noe-ricoy text="[[ text ]]" class="ricoy"></noe-ricoy>
+          <noe-ricoy class="myStyleOne" text="[[ text ]]" class="ricoy"></noe-ricoy>
       </div></paper-card>
 
       <paper-card> <div class="card-content">
@@ -59,11 +96,11 @@
       </div></paper-card>
 
       <paper-card> <div class="card-content">
-        <noe-ricoy text="°°°°°" class="ricoy"></noe-ricoy>
+        <noe-ricoy class="myStyleTwo" text="°°°°°" class="ricoy"></noe-ricoy>
       </div></paper-card>
 
       <paper-card><div class="card-content">
-        <noe-ricoy text="[[ text ]]" class="ricoy"></noe-ricoy>
+        <noe-ricoy class="myStyleThree" text="[[ text ]]" class="ricoy"></noe-ricoy>
       </div></paper-card>
     </div>
 
