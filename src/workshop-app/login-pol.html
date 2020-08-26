@@ -1,0 +1,95 @@
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="login-pol">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+
+      .cardBorderLogin {
+        max-width: 300px;
+        padding: 1rem;
+        position: relative;
+        background: linear-gradient(to right, rgb(207, 16, 143), rgb(153, 55, 153));
+        padding: 3px;
+      }
+
+      .cardContentLogin {
+        background: white;
+        color: rgb(0, 0, 0);
+        padding: 2rem;
+      }
+
+      .inputLogin {
+          margin-bottom: 1em;
+      }
+
+      paper-button {
+        --paper-button: {
+            background: rgb(207, 16, 143);
+            color: white;
+            width: 100%;
+            margin-top: 1em;
+        }
+      }
+
+    </style>
+
+    <center class="modal">
+        <paper-card class="cardBorderLogin">
+            <div class="card-content cardContentLogin">
+                <p>Login</p>
+                <input class="inputLogin" type="text" placeholder="Email" value="[[ email ]]" id="inputEmail">
+                <input class="inputLogin" type="password" placeholder="Password" value="[[ password ]]" id="inputPassword">
+                <input type="checkbox" name="remember" id="inputCheck" value="true">
+                <label for="remember">Remember me</label><br />
+                <paper-button on-click="signInValidate" toggles raised class="indigo">
+                    Login
+                </paper-button>
+            </div>
+        </paper-card>
+    </center>
+
+  </template>
+
+  <script>
+    class LoginPol extends Polymer.Element {
+      static get is() { return 'login-pol'; }
+      static get properties() {
+        return {
+          signin: {
+            type: Boolean,
+            notify: true,
+          },
+          email: {
+              type: String,
+              value: ''
+          },
+          password: {
+              type: String,
+              value: ''
+          },
+          check: {
+              type: Boolean,
+          }
+        };
+      }
+
+      signInValidate() {
+          this.email = this.$.inputEmail.value;
+          this.password = this.$.inputPassword.value;
+          this.check = this.$.inputCheck.checked;
+
+          if(this.email != '' && this.password != '') {
+            this.signin = true;
+            alert('Hurraa!')
+          }
+      }
+    }
+
+    window.customElements.define(LoginPol.is, LoginPol);
+  </script>
+</dom-module>

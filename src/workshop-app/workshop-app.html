@@ -3,6 +3,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
+<link rel="import" href="./login-pol.html">
 
 <dom-module id="workshop-app">
   <template>
@@ -72,41 +73,46 @@
       }
     </style>
 
-    <paper-card> <div class="card-content">
-      <p>Hacer click sobre el texto para animación</p>
-    </div></paper-card>
+    <template is="dom-if" if="[[!success]]">
+      <login-pol on-signin-changed="deleteLogin"></login-pol>
+    </template>
 
-    <div class="form">
+    <template is="dom-if" if="[[success]]">
+      <paper-card> <div class="card-content">
+        <p>Hacer click sobre el texto para animación</p>
+      </div></paper-card>
 
-      <div class="inputBinding">
-        <paper-input always-float-label label="Floating label" id="inputText"></paper-input>
-        <paper-button on-click="changeText" toggles raised class="indigo">
-          Agregar
-        </paper-button>
+      <div class="form">
+        <div class="inputBinding">
+          <paper-input always-float-label label="Floating label" id="inputText"></paper-input>
+          <paper-button on-click="changeText" toggles raised class="indigo">
+            Agregar
+          </paper-button>
+        </div>
       </div>
-    </div>
+      
+      <div class="container" id="nooContent">
+        <paper-card><div class="card-content">
+            <noe-ricoy class="myStyleOne" text="[[ text ]]" class="ricoy"></noe-ricoy>
+        </div></paper-card>
+  
+        <paper-card> <div class="card-content">
+            <noe-ricoy text="°°°°°" class="ricoy"></noe-ricoy>
+        </div></paper-card>
+  
+        <paper-card> <div class="card-content">
+          <noe-ricoy class="myStyleTwo" text="°°°°°" class="ricoy"></noe-ricoy>
+        </div></paper-card>
+  
+        <paper-card><div class="card-content">
+          <noe-ricoy class="myStyleThree" text="[[ text ]]" class="ricoy"></noe-ricoy>
+          </div></paper-card>
+        </div>
     
-    <div class="container" id="nooContent">
-      <paper-card><div class="card-content">
-          <noe-ricoy class="myStyleOne" text="[[ text ]]" class="ricoy"></noe-ricoy>
-      </div></paper-card>
-
-      <paper-card> <div class="card-content">
-          <noe-ricoy text="°°°°°" class="ricoy"></noe-ricoy>
-      </div></paper-card>
-
-      <paper-card> <div class="card-content">
-        <noe-ricoy class="myStyleTwo" text="°°°°°" class="ricoy"></noe-ricoy>
-      </div></paper-card>
-
-      <paper-card><div class="card-content">
-        <noe-ricoy class="myStyleThree" text="[[ text ]]" class="ricoy"></noe-ricoy>
-      </div></paper-card>
-    </div>
-
-    <div class="inputBinding">
-      <paper-input always-float-label label="Floating label" id="inputTest" on-keyup="test" value="[[ text ]]"></paper-input>
-    </div>
+        <div class="inputBinding">
+          <paper-input always-float-label label="Floating label" id="inputTest" on-keyup="test" value="[[ text ]]"></paper-input>
+        </div>
+    </template>
 
 
   </template>
@@ -120,9 +126,9 @@
       static get is() { return 'workshop-app'; }
       static get properties() {
         return {
-          prop1: {
-            type: String,
-            value: 'Test',
+          success: {
+            type: Boolean,
+            value: false,
           }
         };
       }
@@ -143,6 +149,10 @@
 
       test() {
         this.text = this.$.inputTest.value;
+      }
+
+      deleteLogin() {
+       this.success = true;
       }
     }
 
