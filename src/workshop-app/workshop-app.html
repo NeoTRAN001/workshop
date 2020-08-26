@@ -3,7 +3,7 @@
 <link rel="import" href="../../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
-<link rel="import" href="./login-pol.html">
+<link rel="import" href="../../bower_components/login-workshop/login-workshop.html">
 
 <dom-module id="workshop-app">
   <template>
@@ -74,7 +74,7 @@
     </style>
 
     <template is="dom-if" if="[[!success]]">
-      <login-pol on-signin-changed="deleteLogin"></login-pol>
+      <login-workshop on-signin-changed="deleteLogin"></login-workshop>
     </template>
 
     <template is="dom-if" if="[[success]]">
