@@ -131,7 +131,7 @@
 
       <template is="dom-repeat" items="[[ PokemonsName ]]">
         <paper-card><div class="card-content">
-          <h2>{{ item.name }}</h2>
+          <h2>{{ item.index }}° - {{ item.name }}</h2>
           <img class="pokeImg" src="{{ item.url }}" alt="">
           </div></paper-card>
         </div>
@@ -173,6 +173,7 @@
         data.forEach((pokemon, id) => {
           pokes.push({
             name: pokemon.name,
+            index: id + 1,
             url: `https://pokeres.bastionbot.org/images/pokemon/${id+1}.png`
           });
         });
