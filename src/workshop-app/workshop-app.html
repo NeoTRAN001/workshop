@@ -72,6 +72,10 @@
           transform: translateX(0.1em);
         }
       }
+
+      .pokeImg {
+        width: 70px;
+      }
     </style>
 
     <template is="dom-if" if="[[!success]]">
@@ -127,8 +131,8 @@
 
       <template is="dom-repeat" items="[[ PokemonsName ]]">
         <paper-card><div class="card-content">
-          <p>{{ item.name }}</p>
-          <img src="{{ item.url }}" alt="">
+          <h2>{{ item.name }}</h2>
+          <img class="pokeImg" src="{{ item.url }}" alt="">
           </div></paper-card>
         </div>
       </template>
