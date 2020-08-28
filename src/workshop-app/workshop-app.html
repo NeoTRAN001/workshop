@@ -4,6 +4,7 @@
 <link rel="import" href="../../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../../bower_components/login-workshop/login-workshop.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="workshop-app">
   <template>
@@ -74,7 +75,8 @@
     </style>
 
     <template is="dom-if" if="[[!success]]">
-      <login-workshop on-signin-changed="deleteLogin"></login-workshop>
+      <!--<login-workshop on-signin-changed="hiddenLogin"></login-workshop>-->
+      <login-workshop></login-workshop>
     </template>
 
     <template is="dom-if" if="[[success]]">
@@ -110,12 +112,28 @@
         </div>
     
         <div class="inputBinding">
-          <paper-input always-float-label label="Floating label" id="inputTest" on-keyup="test" value="[[ text ]]"></paper-input>
+          <paper-input always-float-label label="Floating label" id="inputTextKeyUp" on-keyup="changeTextKeyUp" value="[[ text ]]"></paper-input>
         </div>
     </template>
 
+    <!--<template is="dom-if" if="[[success]]"> -->
+      <iron-ajax
+        auto
+        url="https://pokeapi.co/api/v2/pokemon?limit=50"
+        handle-as="json"
+        on-response="getPokemonsName"
+      >
+      </iron-ajax>
 
-  </template>
+      <template is="dom-repeat" items="[[ PokemonsName ]]">
+        <paper-card><div class="card-content">
+          <p>{{ item.name }}</p>
+          <img src="{{ item.url }}" alt="">
+          </div></paper-card>
+        </div>
+      </template>
+    </template>
+  <!-- </template> -->
 
   <script>
     /**
@@ -128,9 +146,38 @@
         return {
           success: {
             type: Boolean,
-            value: false,
+            value: true,
+          },
+          PokemonsName: {
+            type: Array,
+            value() {return []}
           }
         };
+      }
+
+      ready() {
+        super.ready();
+        this.addEventListener('SigIn', (e) => {
+          this.success = e.detail.signin;
+        });
+      }
+
+      getPokemonsName(e) {
+        let data = e.detail.response['results'];
+        let pokes = [];
+
+        data.forEach((pokemon, id) => {
+          pokes.push({
+            name: pokemon.name,
+            url: `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
+          });
+        });
+
+        this.PokemonsName = pokes;
+      }
+
+      getPokemonsImage(e) {
+        console.log(e.detail.response)
       }
 
       changeText() {
@@ -147,11 +194,11 @@
         nooContent.appendChild(card);
       }
 
-      test() {
-        this.text = this.$.inputTest.value;
+      changeTextKeyUp() {
+        this.text = this.$.inputTextKeyUp.value;
       }
 
-      deleteLogin() {
+      hiddenLogin() {
        this.success = true;
       }
     }
